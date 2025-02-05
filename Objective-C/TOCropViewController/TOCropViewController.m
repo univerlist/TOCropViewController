@@ -611,22 +611,24 @@ static const CGFloat kTOCropViewControllerToolbarHeight = 44.0f;
     //Prepare the list that will be fed to the alert view/controller
 
     // Ratio titles according to the order of enum TOCropViewControllerAspectRatioPreset
-    NSArray<NSString *> *portraitRatioTitles = @[originalButtonTitle, squareButtonTitle, @"2:3", @"3:5", @"3:4", @"4:5", @"5:7", @"9:16"];
-    NSArray<NSString *> *landscapeRatioTitles = @[originalButtonTitle, squareButtonTitle, @"3:2", @"5:3", @"4:3", @"5:4", @"7:5", @"16:9"];
+    NSArray<NSString *> *ratioTitles = @[originalButtonTitle, squareButtonTitle, @"3:2", @"5:3", @"4:3", @"5:4", @"7:5", @"16:9", @"2:1", @"21:9", @"1:1", @"9:16", @"3:4", @"4:5", @"3:5", @"2:3"];
+
+
+
 
     NSMutableArray *ratioValues = [NSMutableArray array];
     NSMutableArray *itemStrings = [NSMutableArray array];
 
     if (self.allowedAspectRatios == nil) {
         for (NSInteger i = 0; i < TOCropViewControllerAspectRatioPresetCustom; i++) {
-            NSString *itemTitle = verticalCropBox ? portraitRatioTitles[i] : landscapeRatioTitles[i];
+            NSString *itemTitle = ratioTitles[i];
             [itemStrings addObject:itemTitle];
             [ratioValues addObject:@(i)];
         }
     } else {
         for (NSNumber *allowedRatio in self.allowedAspectRatios) {
             TOCropViewControllerAspectRatioPreset ratio = allowedRatio.integerValue;
-            NSString *itemTitle = verticalCropBox ? portraitRatioTitles[ratio] : landscapeRatioTitles[ratio];
+            NSString *itemTitle = ratioTitles[ratio];
             [itemStrings addObject:itemTitle];
             [ratioValues addObject:allowedRatio];
         }
